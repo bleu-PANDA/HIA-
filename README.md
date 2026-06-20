@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 🩺 HIA (Health Insights Agent)
 
 AI Agent to analyze blood reports and provide detailed health insights.
@@ -102,8 +101,5 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 
 ## 🙋‍♂️ Author
 
-Created by [Mehul Raj]
-=======
-# HIA-
-Hia (Health Insights Agent) - AI Agent to analyze blood reports and provide detailed health insights.
->>>>>>> 6c40c6d39a1d29715901a488ef35f44676ad4646
+Created by [Mehul Raj](https://github.com/bleu-PANDA)
+
