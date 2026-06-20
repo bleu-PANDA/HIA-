@@ -10,8 +10,8 @@ def show_footer(in_sidebar=False):
     st.markdown("""
         <style>
             .footer-card-container {
-                background: #ffffff !important;
-                border: 1px solid #e2e8f0 !important;
+                background: var(--card-bg) !important;
+                border: 1px solid var(--border-light) !important;
                 border-radius: 20px !important;
                 padding: 2rem !important;
                 margin-top: 4rem !important;
@@ -20,7 +20,7 @@ def show_footer(in_sidebar=False):
             }
             
             .footer-card-container div[data-testid="stColumn"] {
-                border-right: 1px solid #e2e8f0 !important;
+                border-right: 1px solid var(--border-light) !important;
                 padding-left: 1.5rem !important;
                 padding-right: 1.5rem !important;
             }
@@ -43,7 +43,7 @@ def show_footer(in_sidebar=False):
             .footer-card-container button {
                 background: transparent !important;
                 border: none !important;
-                color: #475569 !important;
+                color: var(--text-body) !important;
                 text-align: left !important;
                 padding: 0 !important;
                 margin: 0 !important;
@@ -78,7 +78,7 @@ def show_footer(in_sidebar=False):
             font-family:var(--font-heading);
             font-size:1.25rem;
             font-weight:700;
-            color:#0f172a;
+            color:var(--text-main);
             margin-bottom:0.75rem;
             display:flex;
             align-items:center;
@@ -95,7 +95,7 @@ def show_footer(in_sidebar=False):
             <span>HIA</span>
 
             </div>
-            <p style="color: #64748b; font-size: 0.82rem; line-height: 1.5; font-family: var(--font-body); margin: 0; padding-right: 1rem;">
+            <p style="color: var(--text-body); font-size: 0.82rem; line-height: 1.5; font-family: var(--font-body); margin: 0; padding-right: 1rem;">
                 AI-powered health intelligence that understands your reports and empowers your health decisions.
             </p>
             """,
@@ -106,7 +106,7 @@ def show_footer(in_sidebar=False):
     with col2:
         st.markdown(
             """
-            <div style="font-family: var(--font-heading); font-size: 0.88rem; font-weight: 700; color: #0f172a; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">
+            <div style="font-family: var(--font-heading); font-size: 0.88rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">
                 Account
             </div>
             """,
@@ -117,11 +117,11 @@ def show_footer(in_sidebar=False):
             #     st.session_state.show_profile = True
             #     st.rerun()
             st.markdown("<div style='margin-top: 0.25rem;'></div>", unsafe_allow_html=True)
-            if st.button("-> Logout", key="footer_logout_btn"):
+            if st.button("→ Logout", key="footer_logout_btn", type="primary", use_container_width=True):
                 SessionManager.logout()
                 st.rerun()
         else:
-            st.markdown("<p style='color: #94a3b8; font-size: 0.82rem; font-family: var(--font-body); margin: 0;'>Sign in required</p>", unsafe_allow_html=True)
+            st.markdown("<p style='color: var(--text-muted); font-size: 0.82rem; font-family: var(--font-body); margin: 0;'>Sign in required</p>", unsafe_allow_html=True)
 
     # Col 3: Security Certifications
     with col3:
@@ -129,10 +129,10 @@ def show_footer(in_sidebar=False):
         lock_svg = get_svg_icon("Lock", size=14, color="#2563eb", extra_style="vertical-align: middle; margin-right: 6px;")
         st.markdown(
             f"""
-            <div style="font-family: var(--font-heading); font-size: 0.88rem; font-weight: 700; color: #0f172a; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">
+            <div style="font-family: var(--font-heading); font-size: 0.88rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">
                 Security
             </div>
-            <div style="font-family: var(--font-body); font-size: 0.85rem; color: #475569; display: flex; flex-direction: column; gap: 8px;">
+            <div style="font-family: var(--font-body); font-size: 0.85rem; color: var(--text-body); display: flex; flex-direction: column; gap: 8px;">
                 <span style="display: flex; align-items: center;">{shield_svg}HIPAA Compliant</span>
                 <span style="display: flex; align-items: center;">{lock_svg}Data Encryption</span>
             </div>
@@ -146,12 +146,12 @@ def show_footer(in_sidebar=False):
         shield_small_svg = get_svg_icon("Shield", size=14, color="#2563eb", extra_style="vertical-align: middle; margin-right: 6px;")
         st.markdown(
             f"""
-            <div style="font-family: var(--font-heading); font-size: 0.88rem; font-weight: 700; color: #0f172a; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">
+            <div style="font-family: var(--font-heading); font-size: 0.88rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">
                 Support
             </div>
-            <div style="font-family: var(--font-body); font-size: 0.85rem; color: #475569; display: flex; flex-direction: column; gap: 8px;">
-                <a href="#" style="color: #475569; text-decoration: none; display: flex; align-items: center;">{mail_svg}Contact Us</a>
-                <a href="#" style="color: #475569; text-decoration: none; display: flex; align-items: center;">{shield_small_svg}Privacy Policy</a>
+            <div style="font-family: var(--font-body); font-size: 0.85rem; color: var(--text-body); display: flex; flex-direction: column; gap: 8px;">
+                <a href="#" style="color: var(--text-body); text-decoration: none; display: flex; align-items: center;">{mail_svg}Contact Us</a>
+                <a href="#" style="color: var(--text-body); text-decoration: none; display: flex; align-items: center;">{shield_small_svg}Privacy Policy</a>
             </div>
             """,
             unsafe_allow_html=True
@@ -161,7 +161,7 @@ def show_footer(in_sidebar=False):
     with col5:
         st.markdown(
             """
-            <div style="font-family: var(--font-body); font-size: 0.82rem; color: #94a3b8; line-height: 1.5;">
+            <div style="font-family: var(--font-body); font-size: 0.82rem; color: var(--text-muted); line-height: 1.5;">
                 <div>© 2026 HIA</div>
                 <div>All rights reserved.</div>
             </div>

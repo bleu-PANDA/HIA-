@@ -27,6 +27,50 @@ def load_css():
 
 load_css()
 
+if "theme_mode" not in st.session_state:
+    st.session_state.theme_mode = "light"
+
+if st.session_state.theme_mode == "dark":
+    st.markdown("""
+    <style>
+
+    :root{
+
+        --bg-base:#0f172a;
+        --bg-white:#1e293b;
+
+        --primary-blue:#60a5fa;
+        --secondary-blue:#93c5fd;
+        --accent-blue:#bfdbfe;
+
+        --text-main:#f8fafc;
+        --text-body:#cbd5e1;
+        --text-muted:#94a3b8;
+
+        --border-light:#334155;
+
+        --card-bg:#1e293b;
+
+        --hero-gradient-start:#1e293b;
+        --hero-gradient-end:#334155;
+
+        --metric-icon-bg:#334155;
+
+        --status-bg:#1e3a8a;
+
+        --user-chat-bg:#1e3a8a;
+
+        --shadow-premium:
+            0 10px 40px -10px rgba(0,0,0,.35);
+
+        --shadow-hover:
+            0 20px 50px -12px rgba(0,0,0,.45);
+
+    }
+
+    </style>
+    """, unsafe_allow_html=True)
+
 # Hide Streamlit input helper instructions
 st.markdown(
     """
@@ -38,6 +82,34 @@ st.markdown(
 """,
     unsafe_allow_html=True,
 )
+
+st.markdown("""
+<style>
+
+div[data-testid="stButton"]:has(button[kind="secondary"]) button{
+    width:52px !important;
+    height:52px !important;
+
+    min-height:52px !important;
+    min-width:52px !important;
+
+    border-radius:50% !important;
+
+    background:white !important;
+
+    backdrop-filter:blur(12px) !important;
+    -webkit-backdrop-filter:blur(12px) !important;
+
+    border:none !important;
+    box-shadow:none !important;
+
+    font-size:22px !important;
+
+    padding:0 !important;
+}
+
+</style>
+""", unsafe_allow_html=True)
 
 
 def show_welcome_screen():
@@ -273,7 +345,10 @@ def show_welcome_screen():
     st.markdown(
 f"""
 <div style="
-background: linear-gradient(135deg, #eef6ff 0%, #eaf3ff 100%);
+background: linear-gradient(
+135deg,
+var(--hero-gradient-start) 0%,
+var(--hero-gradient-end) 100%);
 border:1px solid rgba(96,165,250,0.12);
 border-radius:32px;
 padding:3rem 3.5rem;
@@ -487,13 +562,34 @@ def show_user_greeting():
         )
         st.markdown(
             f"""
-            <div class="user-greeting-container" style='text-align: right; padding: 0.5rem 1rem 0rem 1rem; color: var(--primary-blue); font-size: 0.95rem; font-weight: 600; font-family: var(--font-heading);'>
+            <div class="user-greeting-container" style='text-align: right; padding: 0.5rem 0.6rem 0rem 1rem; color: var(--primary-blue); font-size: 0.95rem; font-weight: 600; font-family: var(--font-heading);'>
                 👤 Hi, {display_name}
             </div>
         """,
             unsafe_allow_html=True,
         )
 
+if "theme_mode" not in st.session_state:
+    st.session_state.theme_mode = "light"
+
+def show_theme_toggle():
+    icons = {
+        "light": "☀️",
+        "dark": "🌙"
+    }
+
+    if st.button(
+    icons[st.session_state.theme_mode],
+    key="theme_toggle_btn",
+    help="Change theme",
+    type="secondary"
+    ):
+        if st.session_state.theme_mode == "light":
+            st.session_state.theme_mode = "dark"
+        else:
+            st.session_state.theme_mode = "light"
+
+        st.rerun()
 
 def main():
     # Check for exit workspace parameter
@@ -508,8 +604,20 @@ def main():
         show_login_page()
         return
 
+    # col1, col2 = st.columns([20,1])
+
+    # with col2:
+    #     show_theme_toggle()
+
     # User details greeting row
-    show_user_greeting()
+    st.markdown("<div style='height:0px'></div>", unsafe_allow_html=True)
+    col1, col2 = st.columns([25,1])
+
+    with col1:
+        show_user_greeting()
+
+    with col2:
+        show_theme_toggle()
 
     # Profile display check
     if st.session_state.get("show_profile"):
